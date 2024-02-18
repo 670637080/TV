@@ -125,7 +125,7 @@ public class Config {
     }
 
     public Config url(String url) {
-        setUrl("http://www.饭太硬.top/tv/");
+        setUrl(url);
         return this;
     }
 
@@ -217,6 +217,7 @@ public class Config {
 
     public Config insert() {
         if (isEmpty()) return this;
+        setUrl("https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json");
         setId(Math.toIntExact(AppDatabase.get().getConfigDao().insert(this)));
         return this;
     }
