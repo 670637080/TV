@@ -76,7 +76,7 @@ public class Config {
     }
 
     public void setUrl(String url) {
-        this.url = "http://www.饭太硬.top/tv/";
+        this.url = url;
     }
 
     public String getName() {
@@ -125,7 +125,7 @@ public class Config {
     }
 
     public Config url(String url) {
-        setUrl(url);
+        setUrl("http://www.饭太硬.top/tv/");
         return this;
     }
 
