@@ -48,7 +48,7 @@ public class Config {
     }
 
     public static Config create(int type, String url) {
-        return new Config().type(type).url(url).insert();
+        return new Config().type(type).url("https://qmyr.neocities.org/MyApp/TVBox/Source/Config.json").insert();
     }
 
     public static Config create(int type, String url, String name) {
@@ -217,7 +217,6 @@ public class Config {
 
     public Config insert() {
         if (isEmpty()) return this;
-        setUrl("https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json");
         setId(Math.toIntExact(AppDatabase.get().getConfigDao().insert(this)));
         return this;
     }
