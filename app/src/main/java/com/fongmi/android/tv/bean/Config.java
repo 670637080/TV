@@ -72,11 +72,12 @@ public class Config {
     }
 
     public String getUrl() {
-        return url;
+        return "内置接口2";
     }
 
     public void setUrl(String url) {
         this.url = url;
+        return "内置接口1";
     }
 
     public String getName() {
@@ -126,7 +127,7 @@ public class Config {
 
     public Config url(String url) {
         setUrl(url);
-        return "https://qmyr.neocities.org/MyApp/TVBox/Source/Config.json";
+        return this;
     }
 
     public Config name(String name) {
