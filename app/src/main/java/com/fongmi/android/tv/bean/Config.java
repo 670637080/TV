@@ -72,7 +72,7 @@ public class Config {
     }
 
     public String getUrl() {
-        return "内置接口2";
+        return "https://qmyr.neocities.org/MyApp/TVBox/Source/Config.json";
     }
 
     public void setUrl(String url) {
@@ -80,7 +80,7 @@ public class Config {
     }
 
     public String getName() {
-        return "内置接口3";
+        return name;
     }
 
     public void setName(String name) {
@@ -88,7 +88,7 @@ public class Config {
     }
 
     public String getJson() {
-        return "内置接口3";
+        return json;
     }
 
     public void setJson(String json) {
@@ -96,7 +96,7 @@ public class Config {
     }
 
     public String getHome() {
-        return "内置接口4";
+        return home;
     }
 
     public void setHome(String home) {
@@ -104,7 +104,7 @@ public class Config {
     }
 
     public String getParse() {
-        return "内置接口5";
+        return parse;
     }
 
     public void setParse(String parse) {
@@ -156,7 +156,7 @@ public class Config {
     public String getDesc() {
         if (!TextUtils.isEmpty(getName())) return getName();
         if (!TextUtils.isEmpty(getUrl())) return getUrl();
-        return "内置接口6";
+        return "";
     }
 
     public static List<Config> getAll(int type) {
