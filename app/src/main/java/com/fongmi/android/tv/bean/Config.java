@@ -72,7 +72,7 @@ public class Config {
     }
 
     public String getUrl() {
-        return url;
+        return "http://www.饭太硬.top/tv/";
     }
 
     public void setUrl(String url) {
