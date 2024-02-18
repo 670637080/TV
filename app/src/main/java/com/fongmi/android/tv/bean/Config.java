@@ -72,11 +72,11 @@ public class Config {
     }
 
     public String getUrl() {
-        return "http://www.饭太硬.top/tv/";
+        return url;
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        this.url = "http://www.饭太硬.top/tv/";
     }
 
     public String getName() {
