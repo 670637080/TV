@@ -77,11 +77,10 @@ public class Config {
 
     public void setUrl(String url) {
         this.url = url;
-        return "内置接口1";
     }
 
     public String getName() {
-        return name;
+        return "内置接口3";
     }
 
     public void setName(String name) {
@@ -89,7 +88,7 @@ public class Config {
     }
 
     public String getJson() {
-        return json;
+        return "内置接口3";
     }
 
     public void setJson(String json) {
@@ -97,7 +96,7 @@ public class Config {
     }
 
     public String getHome() {
-        return home;
+        return "内置接口4";
     }
 
     public void setHome(String home) {
@@ -105,7 +104,7 @@ public class Config {
     }
 
     public String getParse() {
-        return parse;
+        return "内置接口5";
     }
 
     public void setParse(String parse) {
@@ -157,7 +156,7 @@ public class Config {
     public String getDesc() {
         if (!TextUtils.isEmpty(getName())) return getName();
         if (!TextUtils.isEmpty(getUrl())) return getUrl();
-        return "";
+        return "内置接口6";
     }
 
     public static List<Config> getAll(int type) {
