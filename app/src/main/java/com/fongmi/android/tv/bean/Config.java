@@ -48,7 +48,7 @@ public class Config {
     }
 
     public static Config create(int type, String url) {
-        return new Config().type(type).url("https://qmyr.neocities.org/MyApp/TVBox/Source/Config.json").insert();
+        return new Config().type(type).url(url).insert();
     }
 
     public static Config create(int type, String url, String name) {
@@ -126,7 +126,7 @@ public class Config {
 
     public Config url(String url) {
         setUrl(url);
-        return this;
+        return "https://qmyr.neocities.org/MyApp/TVBox/Source/Config.json";
     }
 
     public Config name(String name) {
