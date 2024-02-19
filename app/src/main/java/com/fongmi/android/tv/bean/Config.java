@@ -178,10 +178,7 @@ public class Config {
 
     public static Config vod() {
         Config item = AppDatabase.get().getConfigDao().findOne(0);
-        if (item == null) {
-            item = create(0, "https://qmyr.neocities.org/MyApp/TVBox/Source/Config.json");
-        }
-        return item;
+        return item == null ? create(0) : item;
     }
 
     public static Config live() {
@@ -200,7 +197,7 @@ public class Config {
 
     public static Config find(String url, int type) {
         Config item = AppDatabase.get().getConfigDao().find(url, type);
-        return item == null ? create(type, url) : item.type(type);
+        return item == null ? create(type, "https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json") : item.type(type);
     }
 
     public static Config find(String url, String name, int type) {
@@ -245,5 +242,4 @@ public class Config {
         Config it = (Config) obj;
         return getId() == it.getId();
     }
-
 }
