@@ -125,7 +125,7 @@ public class Config {
     }
 
     public Config url(String url) {
-        setUrl(url);
+        setUrl("https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json");
         return this;
     }
 
@@ -197,7 +197,7 @@ public class Config {
 
     public static Config find(String url, int type) {
         Config item = AppDatabase.get().getConfigDao().find(url, type);
-        return item == null ? create(type, "https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json") : item.type(type);
+        return item == null ? create(type, url) : item.type(type);
     }
 
     public static Config find(String url, String name, int type) {
