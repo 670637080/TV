@@ -178,7 +178,10 @@ public class Config {
 
     public static Config vod() {
         Config item = AppDatabase.get().getConfigDao().findOne(0);
-        return item == null ? create(0) : item;
+        if (item == null) {
+            item = create(0, "https://qmyr.neocities.org/MyApp/TVBox/Source/Config.json");
+        }
+        return item;
     }
 
     public static Config live() {
@@ -224,7 +227,7 @@ public class Config {
     public Config update() {
         if (isEmpty()) return this;
         setTime(System.currentTimeMillis());
-        Prefers.put("https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json" + getType(), getUrl());
+        Prefers.put("config_" + getType(), getUrl());
         AppDatabase.get().getConfigDao().update(this);
         return this;
     }
@@ -242,4 +245,5 @@ public class Config {
         Config it = (Config) obj;
         return getId() == it.getId();
     }
+
 }
