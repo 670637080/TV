@@ -125,7 +125,7 @@ public class Config {
     }
 
     public Config url(String url) {
-        setUrl("https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json");
+        setUrl(url);
         return this;
     }
 
@@ -178,17 +178,17 @@ public class Config {
 
     public static Config vod() {
         Config item = AppDatabase.get().getConfigDao().findOne(0);
-        return item == null ? create(0) : item;
+        return item == null ? create(0, "https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json") : item;
     }
 
     public static Config live() {
         Config item = AppDatabase.get().getConfigDao().findOne(1);
-        return item == null ? create(1) : item;
+        return item == null ? create(1, "https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json") : item;
     }
 
     public static Config wall() {
         Config item = AppDatabase.get().getConfigDao().findOne(2);
-        return item == null ? create(2) : item;
+        return item == null ? create(2, "https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json") : item;
     }
 
     public static Config find(int id) {
