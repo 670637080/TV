@@ -72,7 +72,7 @@ public class Config {
     }
 
     public String getUrl() {
-        return url;
+        return "https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json";
     }
 
     public void setUrl(String url) {
