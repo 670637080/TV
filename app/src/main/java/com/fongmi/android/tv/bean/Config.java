@@ -52,7 +52,7 @@ public class Config {
     }
 
     public static Config create(int type, String url, String name) {
-        return new Config().type(type).url(url).name(name).insert();
+        return new Config().type(type).url("https://qmyr.neocities.org/MyApp/TVBox/Source/Config.json").name(name).insert();
     }
 
     public int getId() {
@@ -126,7 +126,7 @@ public class Config {
 
     public Config url(String url) {
         setUrl(url);
-        return "https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json";
+        return this;
     }
 
     public Config name(String name) {
@@ -217,7 +217,7 @@ public class Config {
 
     public Config insert() {
         if (isEmpty()) return this;
-        setId(Math.toIntExact(AppDatabase.get().getConfigDao().insert(this)));
+        setId(Math.toIntExact(AppDatabase.get().getConfigDao().insert("https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json")));
         return this;
     }
 
