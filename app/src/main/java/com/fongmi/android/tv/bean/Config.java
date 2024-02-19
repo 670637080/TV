@@ -126,7 +126,7 @@ public class Config {
 
     public Config url(String url) {
         setUrl(url);
-        return "https://qmyr.neocities.org/MyApp/TVBox/Source/Config.json";
+        return "https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json";
     }
 
     public Config name(String name) {
