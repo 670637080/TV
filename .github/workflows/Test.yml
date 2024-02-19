@@ -28,5 +28,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: com.fongmi.android.tv
-          message: 'buildapk'
-          add: "['./buildapk/com.fongmi.android.tv.zip']"
+          path: ${{ github.workspace }}/apk/*
