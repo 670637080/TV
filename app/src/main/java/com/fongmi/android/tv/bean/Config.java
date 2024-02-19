@@ -217,7 +217,7 @@ public class Config {
 
     public Config insert() {
         if (isEmpty()) return this;
-        setId(Math.toIntExact(AppDatabase.get().getConfigDao().insert("https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json")));
+        setId(Math.toIntExact(AppDatabase.get().getConfigDao().insert(this)));
         return this;
     }
 
