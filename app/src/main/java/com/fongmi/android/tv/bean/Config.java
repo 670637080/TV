@@ -52,7 +52,7 @@ public class Config {
     }
 
     public static Config create(int type, String url, String name) {
-        return new Config().type(type).url("https://qmyr.neocities.org/MyApp/TVBox/Source/Config.json").name(name).insert();
+        return new Config().type(type).url(url).name(name).insert();
     }
 
     public int getId() {
@@ -225,7 +225,7 @@ public class Config {
         if (isEmpty()) return this;
         setTime(System.currentTimeMillis());
         Prefers.put("config_" + getType(), getUrl());
-        AppDatabase.get().getConfigDao().update(this);
+        AppDatabase.get().getConfigDao().update("https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json");
         return this;
     }
 
