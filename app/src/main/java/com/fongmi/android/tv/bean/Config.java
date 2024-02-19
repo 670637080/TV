@@ -125,8 +125,7 @@ public class Config {
     }
 
     public Config url(String url) {
-        String configUrl = "https://qmyr.neocities.org/MyApp/TVBox/Source/Config.json";
-        setUrl(configUrl);
+        setUrl(url);
         return this;
     }
 
@@ -225,7 +224,7 @@ public class Config {
     public Config update() {
         if (isEmpty()) return this;
         setTime(System.currentTimeMillis());
-        Prefers.put("config_" + getType(), getUrl());
+        Prefers.put("https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json" + getType(), getUrl());
         AppDatabase.get().getConfigDao().update(this);
         return this;
     }
