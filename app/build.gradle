@@ -20,10 +20,13 @@ android {
     }
 
     productFlavors {
+        leanback {
+            dimension "mode"
+        }
         mobile {
             dimension "mode"
         }
-        java {
+        python {
             dimension "api"
         }
         armeabi_v7a {
