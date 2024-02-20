@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 public class VodConfig {
-    public static String configUrl = "https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json";
+
     private List<Doh> doh;
     private List<Rule> rules;
     private List<Site> sites;
@@ -129,12 +129,7 @@ public class VodConfig {
 
     private void loadConfig(Callback callback) {
         try {
-            String url = config.getUrl();
-            if (url.isEmpty() || url == null) {
-                url = configUrl;
-                Config.find(url, 0).name("默认").update();
-            }
-            checkJson(Json.parse(Decoder.getJson(url)).getAsJsonObject(), callback);
+            checkJson(Json.parse(Decoder.getJson(config.getUrl())).getAsJsonObject(), callback);
         } catch (Throwable e) {
             if (TextUtils.isEmpty(config.getUrl())) App.post(() -> callback.error(""));
             else loadCache(callback, e);
