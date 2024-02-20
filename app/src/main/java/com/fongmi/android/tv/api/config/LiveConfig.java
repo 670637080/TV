@@ -7,6 +7,7 @@ import com.fongmi.android.tv.R;
 import com.fongmi.android.tv.Setting;
 import com.fongmi.android.tv.api.Decoder;
 import com.fongmi.android.tv.api.LiveParser;
+import com.fongmi.android.tv.api.config.VodConfig;
 import com.fongmi.android.tv.bean.Channel;
 import com.fongmi.android.tv.bean.Config;
 import com.fongmi.android.tv.bean.Depot;
@@ -99,7 +100,12 @@ public class LiveConfig {
 
     private void loadConfig(Callback callback) {
         try {
-            parseConfig(Decoder.getJson(config.getUrl()), callback);
+            String url = config.getUrl();
+            if (url.isEmpty || url == null) {
+                url = VodConfig.configUrl;
+                Config.find(url, 1).name("默认").update();
+            }
+            parseConfig(Decoder.getJson(url), callback);
         } catch (Throwable e) {
             if (TextUtils.isEmpty(config.getUrl())) App.post(() -> callback.error(""));
             else App.post(() -> callback.error(Notify.getError(R.string.error_config_get, e)));
