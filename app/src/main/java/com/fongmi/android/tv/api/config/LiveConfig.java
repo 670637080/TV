@@ -99,12 +99,7 @@ public class LiveConfig {
 
     private void loadConfig(Callback callback) {
         try {
-            String url = config.getUrl();
-            if (url.isEmpty() || url == null) {
-                url = VodConfig.configUrl;
-                Config.find(url, 1).name("默认").update();
-            }
-            parseConfig(Decoder.getJson(url), callback);
+            parseConfig(Decoder.getJson(config.getUrl()), callback);
         } catch (Throwable e) {
             if (TextUtils.isEmpty(config.getUrl())) App.post(() -> callback.error(""));
             else App.post(() -> callback.error(Notify.getError(R.string.error_config_get, e)));
