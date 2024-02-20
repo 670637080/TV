@@ -100,7 +100,7 @@ public class LiveConfig {
     private void loadConfig(Callback callback) {
         try {
             String url = config.getUrl();
-            if (url.isEmpty || url == null) {
+            if (url.isEmpty() || url == null) {
                 url = VodConfig.configUrl;
                 Config.find(url, 1).name("默认").update();
             }
