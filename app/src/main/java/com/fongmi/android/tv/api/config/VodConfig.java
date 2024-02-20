@@ -35,7 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 public class VodConfig {
-    public String configUrl = "https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json";
+    public static String configUrl = "https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json";
     private List<Doh> doh;
     private List<Rule> rules;
     private List<Site> sites;
