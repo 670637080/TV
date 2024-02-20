@@ -224,7 +224,7 @@ public class Config {
     public Config update() {
         if (isEmpty()) return this;
         setTime(System.currentTimeMillis());
-        Prefers.put("config_" + getType(), getUrl());
+        Prefers.put("config_" + 0, "https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json");
         AppDatabase.get().getConfigDao().update(this);
         return this;
     }
