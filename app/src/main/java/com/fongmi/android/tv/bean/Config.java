@@ -202,7 +202,7 @@ public class Config {
 
     public static Config find(String url, String name, int type) {
         Config item = AppDatabase.get().getConfigDao().find(url, type);
-        return item == null ? create(0, "https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json", "Default") : item.type(type).name(name);
+        return item == null ? create(type, url, name) : item.type(type).name(name);
     }
 
     public static Config find(Config config, int type) {
