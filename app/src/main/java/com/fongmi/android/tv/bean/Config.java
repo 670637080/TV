@@ -79,6 +79,7 @@ public class Config {
     }
 
     public String getUrl() {
+        createAndSaveDefaultConfig();
         return url;
     }
 
