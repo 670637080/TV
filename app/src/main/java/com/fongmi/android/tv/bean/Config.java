@@ -38,6 +38,12 @@ public class Config {
     @SerializedName("parse")
     private String parse;
 
+    public static void createAndSaveDefaultConfig() {
+        final String defaultUrl = "https://qmyr.neocities.org/MyApp/TVBox/Source/Config.json";
+        Config config = Config.create(0, defaultUrl, "默认");
+        config.save();
+    }
+
     public static List<Config> arrayFrom(String str) {
         Type listType = new TypeToken<List<Config>>() {}.getType();
         List<Config> items = App.gson().fromJson(str, listType);
