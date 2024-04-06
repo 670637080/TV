@@ -4,22 +4,27 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.net.http.SslError;
 import android.text.TextUtils;
 import android.view.ViewGroup;
-import android.webkit.CookieManager;
-import android.webkit.SslErrorHandler;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import com.fongmi.android.tv.utils.Notify;
+import com.tencent.smtt.export.external.interfaces.SslError;
+import com.tencent.smtt.export.external.interfaces.SslErrorHandler;
+import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
+import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
+import com.tencent.smtt.sdk.CookieManager;
+import com.tencent.smtt.sdk.QbSdk;
+import com.tencent.smtt.sdk.WebChromeClient;
+import com.tencent.smtt.sdk.WebView;
+import com.tencent.smtt.sdk.WebViewClient;
 
 import androidx.annotation.NonNull;
 
 import com.fongmi.android.tv.App;
 import com.fongmi.android.tv.Constant;
+import com.fongmi.android.tv.R;
 import com.fongmi.android.tv.Setting;
 import com.fongmi.android.tv.api.config.VodConfig;
 import com.fongmi.android.tv.bean.Site;
@@ -49,12 +54,23 @@ public class CustomWebView extends WebView {
     private String key;
 
     public static CustomWebView create(@NonNull Context context) {
+        initTbs();
         return new CustomWebView(context);
     }
 
     public CustomWebView(@NonNull Context context) {
         super(context);
         initSettings();
+        showTbs();
+    }
+
+    private static void initTbs() {
+        if (Setting.getParseWebView() == 0) QbSdk.forceSysWebView();
+        else QbSdk.unForceSysWebView();
+    }
+
+    private void showTbs() {
+        if (this.getIsX5Core())  Notify.show(R.string.x5webview_parsing);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -69,34 +85,36 @@ public class CustomWebView extends WebView {
         getSettings().setBuiltInZoomControls(true);
         getSettings().setDisplayZoomControls(false);
         getSettings().setLoadWithOverviewMode(true);
+        getSettings().setUserAgentString(Setting.getUa());
         getSettings().setMediaPlaybackRequiresUserGesture(false);
         getSettings().setJavaScriptCanOpenWindowsAutomatically(false);
         getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         CookieManager.getInstance().setAcceptThirdPartyCookies(this, true);
         setWebViewClient(webViewClient());
-    }
-
-    private void setUserAgent(Map<String, String> headers) {
-        if (headers.isEmpty()) {
-            getSettings().setUserAgentString(Setting.getUa());
-        } else for (String key : headers.keySet()) {
-            if (key.equalsIgnoreCase(HttpHeaders.USER_AGENT)) {
-                getSettings().setUserAgentString(headers.get(key));
-                break;
-            }
-        }
+        setWebChromeClient(webChromeClient());
     }
 
     public CustomWebView start(String key, String from, Map<String, String> headers, String url, String click, ParseCallback callback, boolean detect) {
         App.post(timer, Constant.TIMEOUT_PARSE_WEB);
         this.callback = callback;
-        setUserAgent(headers);
-        loadUrl(url, headers);
         this.detect = detect;
         this.click = click;
         this.from = from;
         this.key = key;
+        start(url, headers);
         return this;
+    }
+
+    private void start(String url, Map<String, String> headers) {
+        checkHeader(url, headers);
+        loadUrl(url, headers);
+    }
+
+    private void checkHeader(String url, Map<String, String> headers) {
+        for (String key : headers.keySet()) {
+            if (HttpHeaders.COOKIE.equalsIgnoreCase(key)) CookieManager.getInstance().setCookie(url, headers.get(key));
+            if (HttpHeaders.USER_AGENT.equalsIgnoreCase(key)) getSettings().setUserAgentString(headers.get(key));
+        }
     }
 
     private WebViewClient webViewClient() {
@@ -135,6 +153,19 @@ public class CustomWebView extends WebView {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
+            }
+        };
+    }
+
+    private WebChromeClient webChromeClient() {
+        return new WebChromeClient() {
+            @Override
+            public Bitmap getDefaultVideoPoster() {
+                try {
+                    return BitmapFactory.decodeResource(App.get().getResources(), R.drawable.ic_logo);
+                } catch (Throwable e) {
+                    return super.getDefaultVideoPoster();
+                }
             }
         };
     }
