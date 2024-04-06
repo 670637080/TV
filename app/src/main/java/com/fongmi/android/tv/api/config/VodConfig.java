@@ -134,12 +134,7 @@ public class VodConfig {
 
     private void loadConfig(Callback callback) {
         try {
-            String url = config.getUrl();
-            if (TextUtils.isEmpty(url)) {
-                url = "https://qmyr.neocities.org/MyApp/TVBox/Source/fm.json";
-                Config.find(url, 0).name("默认").update();
-            }
-            checkJson(Json.parse(Decoder.getJson(url)).getAsJsonObject(), callback);
+            checkJson(Json.parse(Decoder.getJson(config.getUrl())).getAsJsonObject(), callback);
         } catch (Throwable e) {
             if (TextUtils.isEmpty(config.getUrl())) App.post(() -> callback.error(""));
             else loadCache(callback, e);
